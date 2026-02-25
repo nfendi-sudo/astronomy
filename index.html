@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموسوعة الشاملة: Astronomy & Space | بكالوريا الجزائر</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --space-bg: #090c15; /* لون سماء الليل المظلمة */
+            --nebula: #1e143b; /* بنفسجي فلكي */
+            --gold: #f1c40f; /* ذهبي هلالي */
+            --text-light: #ecf0f1;
+            --accent: #e74c3c;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(to bottom, var(--space-bg), var(--nebula));
+            background-attachment: fixed;
+            color: var(--text-light);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        /* خلفية النجوم */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.6;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border-radius: 15px;
+            border: 1px solid rgba(241, 196, 15, 0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        header {
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 2px dashed var(--gold);
+            position: relative;
+        }
+
+        header h1 {
+            color: var(--gold);
+            font-size: 3rem;
+            margin: 0;
+            font-weight: 900;
+            text-shadow: 0 0 20px rgba(241, 196, 15, 0.4);
+        }
+
+        header p { font-size: 1.2rem; color: #bdc3c7; }
+
+        /* الأكورديون (القوائم المنسدلة للمحتوى الكثيف) */
+        .accordion {
+            background-color: rgba(241, 196, 15, 0.1);
+            color: var(--gold);
+            cursor: pointer;
+            padding: 20px;
+            width: 100%;
+            text-align: right;
+            border: none;
+            outline: none;
+            transition: 0.4s;
+            font-size: 1.4rem;
+            font-weight: bold;
+            font-family: 'Tajawal';
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .active, .accordion:hover {
+            background-color: rgba(241, 196, 15, 0.2);
+        }
+
+        .accordion:after {
+            content: '\002B'; /* رمز الزائد */
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .active:after { content: "\2212"; /* رمز الناقص */ }
+
+        .panel {
+            padding: 0 25px;
+            background-color: rgba(0, 0, 0, 0.2);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .panel-content { padding: 25px 0; }
+
+        /* الجداول (المصطلحات) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        th, td {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px;
+            text-align: right;
+        }
+
+        th { background: var(--gold); color: #000; text-align: center; }
+
+        .en {
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            color: #5dade2;
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* القواعد */
+        .grammar-box {
+            background: rgba(255,255,255,0.08);
+            border-right: 5px solid var(--accent);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .formula {
+            display: block;
+            background: #000;
+            color: #2ecc71;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: 'Roboto', monospace;
+            text-align: left;
+            direction: ltr;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+
+        /* الوضعيات الإدماجية */
+        .writing-card {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--gold);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .writing-title {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #555;
+            padding-bottom: 10px;
+        }
+
+        .paragraph {
+            font-family: 'Roboto', sans-serif;
+            direction: ltr;
+            text-align: left;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #fff;
+            background: rgba(255,255,255,0.02);
+            padding: 15px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .translation {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #aaa;
+        }
+
+        .btn-print {
+            display: block;
+            width: 250px;
+            margin: 40px auto;
+            padding: 15px;
+            background: var(--gold);
+            color: #000;
+            text-align: center;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Tajawal';
+        }
+
+        @media print {
+            body { background: white; color: black; }
+            .container { box-shadow: none; border: none; }
+            .accordion { background: #eee; color: black; border: 1px solid #ccc; }
+            .accordion:after { display: none; }
+            .panel { max-height: none !important; opacity: 1; }
+            .btn-print { display: none; }
+            .en { color: #000; }
+            .writing-card { border: 1px solid black; break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🌙 وحدة الفلك - Astronomy 🚀</h1>
+        <p>المرجع الشامل لطلبة البكالوريا (رصيد لغوي، قواعد، ووضعيات جاهزة للحفظ)</p>
+    </header>
+
+    <button class="accordion">01. الرصيد اللغوي الكثيف (Vocabulary Bank)</button>
+    <div class="panel">
+        <div class="panel-content">
+            <p>لتفهم أي نص في البكالوريا، يجب أن تحفظ هذه العائلات من الكلمات:</p>
+            
+            <h3>أ. الأجرام السماوية والكون (The Universe)</h3>
+            <table>
+                <tr><th>الكلمة (English)</th><th>المرادف/الضد</th><th>المعنى بالعربية</th></tr>
+                <tr><td class="en">Universe / Cosmos</td><td class="en">Space</td><td>الكون / الفضاء</td></tr>
+                <tr><td class="en">Solar System</td><td class="en">-</td><td>النظام الشمسي</td></tr>
+                <tr><td class="en">Galaxy</td><td class="en">ex: Milky Way</td><td>المجرة (مثل: درب التبانة)</td></tr>
+                <tr><td class="en">Celestial Bodies</td><td class="en">Heavenly bodies</td><td>الأجرام السماوية</td></tr>
+                <tr><td class="en">Planets</td><td class="en">ex: Earth, Mars, Jupiter</td><td>الكواكب</td></tr>
+                <tr><td class="en">Stars</td><td class="en">ex: The Sun</td><td>النجوم (تضيء بذاتها)</td></tr>
+                <tr><td class="en">Moons / Satellites</td><td class="en">-</td><td>الأقمار (توابع طبيعية أو صناعية)</td></tr>
+                <tr><td class="en">Asteroids / Comets / Meteors</td><td class="en">Space rocks</td><td>كويكبات / مذنبات / نيازك</td></tr>
+            </table>
+
+            <h3>ب. المفاهيم الفيزيائية والفلكية (Scientific Concepts)</h3>
+            <table>
+                <tr><th>الكلمة (English)</th><th>الشرح</th><th>المعنى بالعربية</th></tr>
+                <tr><td class="en">Orbit / To orbit</td><td class="en">To move around a star</td><td>مدار / يدور في مدار</td></tr>
+                <tr><td class="en">Gravity</td><td class="en">Force that pulls objects</td><td>الجاذبية</td></tr>
+                <tr><td class="en">Rotation / Revolution</td><td class="en">Spinning / moving around</td><td>دوران حول النفس / دوران حول الشمس</td></tr>
+                <tr><td class="en">Light-year</td><td class="en">Unit of distance</td><td>سنة ضوئية (لقياس المسافات)</td></tr>
+                <tr><td class="en">Telescope / Observatory</td><td class="en">Instruments for watching stars</td><td>المقراب (التلسكوب) / المرصد الفلكي</td></tr>
+                <tr><td class="en">Vacuum</td><td class="en">Empty space</td><td>الفراغ (انعدام الهواء)</td></tr>
+            </table>
+
+            <h3>ج. الفلك ضد التنجيم (Astronomy Vs Astrology)</h3>
+            <table>
+                <tr><th>الكلمة (English)</th><th>المرادف/الضد</th><th>المعنى بالعربية</th></tr>
+                <tr><td class="en">Astronomy / Astronomer</td><td class="en">A true Science</td><td>علم الفلك / عالم فلكي</td></tr>
+                <tr><td class="en">Astrology / Astrologer</td><td class="en">Superstition / Myth</td><td>التنجيم (خرافة) / منجم</td></tr>
+                <tr><td class="en">Horoscope / Zodiac signs</td><td class="en">Prediction of future</td><td>الأبراج / توقعات الحظ</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <button class="accordion">02. القواعد الشاملة مع الأمثلة (Grammar)</button>
+    <div class="panel">
+        <div class="panel-content">
+            
+            <div class="grammar-box">
+                <h3>1. الجمل الشرطية (Conditional Sentences) - أساسية جداً</h3>
+                <p>تستخدم <b>Type 0</b> للتعبير عن "الحقائق العلمية" (Scientific Facts) وهي كثيرة في الفلك:</p>
+                <span class="formula">If + Present Simple , Present Simple</span>
+                <p class="en">Ex: If the earth rotates on its axis, we get day and night.</p>
+                
+                <p>تستخدم <b>Type 1</b> للتعبير عن احتمالات في المستقبل (Future Possibility):</p>
+                <span class="formula">If + Present Simple , Future Simple (Will + stem)</span>
+                <p class="en">Ex: If an asteroid hits the earth, it will destroy everything.</p>
+            </div>
+
+            <div class="grammar-box">
+                <h3>2. استخدام Unless (ما لم)</h3>
+                <p>كلمة Unless هي شرطية تعني (إذا لم) وتساوي If...not. (نحذف النفي من الفعل الذي يليها).</p>
+                <span class="formula">Unless + Affirmative Verb = If + Negative Verb</span>
+                <p class="en">Ex: Unless scientists find water on Mars, humans won't live there.<br>
+                (Meaning: If scientists don't find water...)</p>
+            </div>
+
+            <div class="grammar-box">
+                <h3>3. المقارنة والتفضيل (Comparatives & Superlatives)</h3>
+                <p>دائماً نستخدمها لمقارنة الكواكب والنجوم في البعد، الحجم، والحرارة.</p>
+                <ul>
+                    <li><b>المقارنة (Short Adjectives):</b> <code>Adj + ER + THAN</code> <br><span class="en">Ex: Mars is <b>smaller than</b> Earth.</span></li>
+                    <li><b>المقارنة (Long Adjectives):</b> <code>MORE + Adj + THAN</code> <br><span class="en">Ex: Space exploration is <b>more expensive than</b> other fields.</span></li>
+                    <li><b>التفضيل المطلق (Superlative):</b> <code>THE + Adj + EST</code> <br><span class="en">Ex: Jupiter is <b>the biggest</b> planet in the solar system.</span></li>
+                    <li><b>التشابه (Equality):</b> <code>AS + Adj + AS</code> <br><span class="en">Ex: Venus is almost <b>as big as</b> Earth.</span></li>
+                </ul>
+            </div>
+
+            <div class="grammar-box">
+                <h3>4. التعبير عن التشابه والاختلاف (Similarity & Difference)</h3>
+                <ul>
+                    <li><b>للتشابه:</b> Like, Both... and, Similar to. <br><span class="en">Ex: <b>Like</b> Earth, Mars has polar ice caps.</span></li>
+                    <li><b>للاختلاف:</b> Unlike, Whereas, While. <br><span class="en">Ex: <b>Unlike</b> the Earth, the Moon has no atmosphere.</span></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <button class="accordion">03. الوضعيات الإدماجية (Writing: 4 Paragraphs)</button>
+    <div class="panel">
+        <div class="panel-content">
+            <p style="color: var(--accent); font-weight: bold;">تحذير: هذه الفقرات مبنية بمنهجية البكالوريا (مقدمة، عرض، خاتمة). احفظ الحجج واستخدمها في أي موضوع مشابه.</p>
+
+            <div class="writing-card">
+                <div class="writing-title">Topic 1: استكشاف الفضاء (Space Exploration - Pros & Cons)</div>
+                <div class="paragraph">
+                    &nbsp;&nbsp;&nbsp;&nbsp; Since the middle of the 20th century, humans have spent billions of dollars on space exploration. While some people believe that investing in space is a great step for humanity, others think it is just a huge waste of money. So, should we continue exploring space?<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; On the one hand, supporters of space exploration argue that it brings many benefits. First, it helps us develop advanced technologies like satellites, which improved our communication, weather forecasting, and GPS systems. Second, scientists might discover new natural resources and minerals on other planets. Finally, finding a new habitable planet could save humanity in case Earth faces a global disaster.<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; On the other hand, opponents claim that spending millions on rockets is totally unjustified. They believe that our planet Earth is suffering from serious problems such as poverty, deadly diseases, and global warming. Therefore, this money should be spent on solving these issues rather than looking for life on dead planets.<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; In conclusion, I personally believe that space exploration is vital for our scientific progress. However, governments must find a balance between discovering the universe and protecting our own planet.
+                </div>
+                <div class="translation"><b>الترجمة:</b> هل يجب أن نستمر في استكشاف الفضاء؟ المؤيدون يقولون إنه يطور التكنولوجيا (الأقمار الصناعية)، يكتشف الموارد، وقد يوفر كوكباً بديلاً. المعارضون يقولون إنه تبذير للمال، وأن الأرض تعاني من الفقر والأمراض والتلوث ويجب حل هذه المشاكل أولاً. الخاتمة: يجب إيجاد توازن بين استكشاف الفضاء وحماية الأرض.</div>
+            </div>
+
+            <div class="writing-card">
+                <div class="writing-title">Topic 2: علم الفلك مقابل التنجيم (Astronomy vs. Astrology)</div>
+                <div class="paragraph">
+                    &nbsp;&nbsp;&nbsp;&nbsp; Today, many people still confuse astronomy with astrology, thinking they are the same thing. However, there is a massive difference between the two fields in terms of facts and logic.<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; To begin with, Astronomy is an exact science that relies on observation, mathematics, and physics. Astronomers use highly advanced telescopes and satellites to study celestial bodies like stars, planets, and galaxies. Their discoveries have helped humanity understand the universe and calculate time precisely.<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; In contrast, Astrology is nothing but a false superstition. Astrologers claim that the position of stars and planets can affect human personalities and predict the future through horoscopes. Nevertheless, there is absolutely no scientific evidence to prove these claims, and it is mostly used to make money from naive people.<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; To sum up, while astronomy is a noble science that enlightens our minds with facts, astrology remains a myth that plays on people's hopes and fears.
+                </div>
+                <div class="translation"><b>الترجمة:</b> الفرق بين الفلك والتنجيم. الفلك هو علم دقيق يعتمد على الملاحظة والفيزياء والتلسكوبات لدراسة الكون. بينما التنجيم خرافة ووهم يدعي أن النجوم تتحكم في شخصياتنا ومستقبلنا (الأبراج) دون أي دليل علمي، ويستخدم لخداع السذج.</div>
+            </div>
+
+            <div class="writing-card">
+                <div class="writing-title">Topic 3: اصطدام كويكب بالأرض (Asteroid Collision)</div>
+                <div class="paragraph">
+                    &nbsp;&nbsp;&nbsp;&nbsp; The universe is full of moving celestial bodies, such as comets and asteroids. One of the greatest fears of scientists today is the possibility of a massive asteroid hitting our planet. If this catastrophe happens, what will be the consequences?<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; If a giant asteroid strikes the Earth, the impact will be devastating. Firstly, it will cause massive tsunamis, earthquakes, and volcanic eruptions that could wipe out entire cities. Secondly, the explosion will throw millions of tons of dust and ash into the atmosphere. This dark cloud will block the sunlight for years, leading to a sudden drop in temperatures, which scientists call a "nuclear winter." Consequently, plants will die, animals will starve, and human life will be threatened with extinction, just like what happened to the dinosaurs millions of years ago.<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; To prevent this, space agencies like NASA are working hard to track dangerous asteroids and develop technologies to change their orbits before they reach Earth. Safety must always come first.
+                </div>
+                <div class="translation"><b>الترجمة:</b> ماذا لو اصطدم كويكب بالأرض؟ سيسبب تسونامي وزلازل مدمرة. الغبار سيحجب ضوء الشمس لسنوات مسبباً برودة شديدة (شتاء نووي). ستموت النباتات والحيوانات ويهدد البشر بالانقراض كالدينصورات. لذلك وكالات الفضاء تعمل على تتبع وتغيير مسار هذه الكويكبات.</div>
+            </div>
+
+            <div class="writing-card">
+                <div class="writing-title">Topic 4: الحياة على كوكب المريخ (Life on Mars)</div>
+                <div class="paragraph">
+                    &nbsp;&nbsp;&nbsp;&nbsp; Mars, often called the Red Planet, has fascinated scientists for decades. Many space missions have been sent to explore it, hoping to find signs of life or make it a future home for humanity. But can we really live there?<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; Although Mars is the most similar planet to Earth in our solar system, living there is extremely difficult. Unlike Earth, Mars has a very thin atmosphere consisting mostly of carbon dioxide, which means humans cannot breathe without spacesuits. Furthermore, the temperature is freezing cold, and there is no liquid water on its surface, only ice at the poles. Also, the planet lacks a protective magnetic field, leaving it exposed to deadly solar radiation.<br><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp; In brief, while sending astronauts to visit Mars is scientifically possible, establishing a human colony there remains a huge challenge. Protecting our Earth is much easier than trying to live on a dead planet.
+                </div>
+                <div class="translation"><b>الترجمة:</b> هل يمكننا العيش على المريخ؟ بالرغم من تشابهه مع الأرض، إلا أن غلافه الجوي رقيق ومليء بثاني أكسيد الكربون (لا يمكن التنفس). درجات الحرارة متجمدة جداً، ولا يوجد ماء سائل، والجاذبية ضعيفة، والإشعاعات الشمسية قاتلة. باختصار، حماية الأرض أسهل من العيش على المريخ.</div>
+            </div>
+
+        </div>
+    </div>
+
+    <button class="btn-print" onclick="window.print()">🖨️ طباعة الموسوعة (PDF)</button>
+</div>
+
+<script>
+    // تفعيل الأكورديون (القوائم المنسدلة)
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+        });
+    }
+</script>
+
+</body>
+</html>
